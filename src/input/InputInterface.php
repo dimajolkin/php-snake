@@ -5,5 +5,5 @@ namespace dimajolkin\snake\input;
 
 interface InputInterface
 {
-    public function getChar(): string;
+    public function getKey(): string;
 }

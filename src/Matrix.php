@@ -3,10 +3,8 @@
 namespace dimajolkin\snake;
 
 
-use dimajolkin\snake\view\Box;
 use dimajolkin\snake\view\Char;
 use phpdk\awt\Point;
-use Traversable;
 
 class Matrix implements \IteratorAggregate
 {

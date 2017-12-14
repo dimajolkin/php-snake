@@ -12,7 +12,7 @@ class KeyboardInput implements InputInterface
     /**
      * @return string
      */
-    public function getChar(): string
+    public function getKey(): string
     {
         readline_callback_handler_install('', function () {
         });

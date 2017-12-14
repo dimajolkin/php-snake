@@ -6,6 +6,7 @@ namespace dimajolkin\snake;
 use dimajolkin\snake\input\InputInterface;
 use dimajolkin\snake\map\Map;
 use dimajolkin\snake\view\Draw;
+use phpdk\awt\Point;
 
 class Game
 {
@@ -32,31 +33,31 @@ class Game
         $this->draw = new Draw(STDOUT);
     }
 
+    protected function tick(Player $player, callable $func)
+    {
+        $this->map->clear($player->getPosition());
+
+        $func();
+
+        $this->map->set(
+            $player->getPosition(),
+            $player->getChar()
+        );
+    }
+
     public function loop(InputInterface $keyboard)
     {
         $this->draw->draw($this->map);
-
         while (true) {
-            $key = $keyboard->getChar();
+            $key = $keyboard->getKey();
             foreach ($this->gamePads as $gamePad) {
 
                 if ($gamePad->has($key)) {
-                    $this->map->clear($gamePad->getPlayer()->getPosition());
-
-                    $gamePad->pressKey($key);
-
-                    $this->map->set(
-                        $gamePad->getPlayer()->getPosition(),
-                        $gamePad->getPlayer()->getChar()
-                    );
+                    $this->tick($gamePad->getPlayer(), function () use ($gamePad, $key) {
+                        $gamePad->pressKey($key);
+                    });
                 } else {
-
-                    $this->map->clear($gamePad->getPlayer()->getPosition());
-                    $gamePad->getPlayer()->next();
-                    $this->map->set(
-                        $gamePad->getPlayer()->getPosition(),
-                        $gamePad->getPlayer()->getChar()
-                    );
+                    $this->tick($gamePad->getPlayer(), [$gamePad->getPlayer(), 'next']);
                 }
             }
 

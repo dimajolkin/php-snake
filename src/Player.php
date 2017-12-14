@@ -12,12 +12,15 @@ class Player
      * @var Char
      */
     private $char;
+
     /**
      * @var Point
      */
     private $position;
 
     private $look;
+
+    protected $onChange;
 
     /**
      * Player constructor.
@@ -32,6 +35,7 @@ class Player
         $this->look = $look;
     }
 
+
     public function look(): Point
     {
         return $this->look;
@@ -40,7 +44,9 @@ class Player
     private function move($x, $y): void
     {
         $this->look = new Point($x, $y);
+
         if (!$this->getPosition()->equals($this->look)) {
+            $old = clone $this->getPosition();
             $this->getPosition()->translate(
                 $this->look->getX(),
                 $this->look->getY()
