@@ -1,0 +1,15 @@
+{
+    "name": "root/snake",
+    "authors": [
+        {
+            "name": "dimajolkin",
+            "email": "dimajolkin@rambler.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"dimajolkin\\snake\\": "src"}
+    },
+    "require": {
+        "phpdk/pdk": "dev-master"
+    }
+}
