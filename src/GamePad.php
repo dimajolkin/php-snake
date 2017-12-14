@@ -2,8 +2,6 @@
 
 namespace dimajolkin\snake;
 
-use dimajolkin\snake\input\InputInterface;
-
 class GamePad
 {
     /** @var  Player */

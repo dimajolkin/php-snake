@@ -2,11 +2,9 @@
 
 namespace dimajolkin\snake;
 
-
 use dimajolkin\snake\input\InputInterface;
 use dimajolkin\snake\map\Map;
 use dimajolkin\snake\view\Draw;
-use phpdk\awt\Point;
 
 class Game
 {

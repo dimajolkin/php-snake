@@ -2,7 +2,6 @@
 
 namespace dimajolkin\snake;
 
-
 use dimajolkin\snake\view\Char;
 use phpdk\awt\Point;
 

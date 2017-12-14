@@ -3,14 +3,10 @@
 namespace dimajolkin\snake\view;
 
 use dimajolkin\snake\map\Map;
-use dimajolkin\snake\Game;
 use phpdk\awt\Point;
 
 class Draw
 {
-    /** @var  Box|null */
-    private $box;
-
     /** @var bool|resource */
     private $stream;
 

@@ -3,7 +3,9 @@
 namespace dimajolkin\snake\view;
 
 
-class Char
+use phpdk\lang\TObject;
+
+class Char extends TObject
 {
     /** @var  string */
     private $symbol;
