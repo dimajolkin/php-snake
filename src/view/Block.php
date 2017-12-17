@@ -2,7 +2,9 @@
 
 namespace dimajolkin\snake\view;
 
+use phpdk\util\TList;
+
 interface Block
 {
-    public function __toString();
+    public function getListPixels(): TList;
 }

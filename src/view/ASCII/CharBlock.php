@@ -2,11 +2,12 @@
 
 namespace dimajolkin\snake\view\ASCII;
 
-
 use dimajolkin\snake\view\Block;
 use dimajolkin\snake\view\Color;
 use dimajolkin\snake\view\Pixel;
 use phpdk\lang\TObject;
+use phpdk\lang\TString;
+use phpdk\util\TList;
 
 class CharBlock extends TObject implements Block, Pixel
 {
@@ -27,12 +28,19 @@ class CharBlock extends TObject implements Block, Pixel
         $this->color = $color;
     }
 
-    public function __toString()
+    public function getListPixels(): TList
+    {
+        return new TList(Pixel::class, [
+            $this,
+        ]);
+    }
+
+    public function toString(): TString
     {
         if ($this->color) {
-            return "\e[{$this->color}m\e[30m{$this->symbol}\e[0m";
+            return new TString("\e[{$this->color}m\e[30m{$this->symbol}\e[0m");
         }
 
-        return $this->symbol;
+        return new TString($this->symbol);
     }
 }

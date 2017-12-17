@@ -5,6 +5,7 @@ namespace dimajolkin\snake\view\ASCII;
 use dimajolkin\snake\map\Map;
 use dimajolkin\snake\view\Block;
 use dimajolkin\snake\view\DrawDriver;
+use dimajolkin\snake\view\Pixel;
 use phpdk\awt\Point;
 
 class Draw implements DrawDriver
@@ -49,7 +50,11 @@ class Draw implements DrawDriver
 
         foreach ($map->getMatrix() as $line) {
             foreach ($line as $box) {
-                fwrite($this->stream, (string)$box);
+                if ($box instanceof Block) {
+                    foreach ($box->getListPixels() as $pixel) {
+                        fwrite($this->stream, (string)$pixel);
+                    }
+                }
             }
             $this->newLine();
         }

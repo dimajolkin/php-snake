@@ -2,10 +2,10 @@
 
 namespace dimajolkin\snake\view\ASCII;
 
-use dimajolkin\snake\common\ToStringInterface;
 use dimajolkin\snake\view\Color as IColor;
+use phpdk\lang\TObject;
 
-class Color implements ToStringInterface, IColor
+class Color extends TObject implements IColor
 {
     protected $int;
 
