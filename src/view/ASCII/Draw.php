@@ -48,9 +48,8 @@ class Draw implements DrawDriver
         $this->newLine();
 
         foreach ($map->getMatrix() as $line) {
-            foreach ($line as $char) {
-
-                fwrite($this->stream, (string)$char);
+            foreach ($line as $box) {
+                fwrite($this->stream, (string)$box);
             }
             $this->newLine();
         }

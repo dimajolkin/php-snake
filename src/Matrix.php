@@ -117,6 +117,7 @@ class Matrix implements \IteratorAggregate
         $this->bottomRightPoint = $bottomRightPoint;
     }
 
+
     public function getIterator()
     {
         return new \ArrayIterator($this->matrix);
