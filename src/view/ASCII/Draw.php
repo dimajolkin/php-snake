@@ -1,11 +1,13 @@
 <?php
 
-namespace dimajolkin\snake\view;
+namespace dimajolkin\snake\view\ASCII;
 
 use dimajolkin\snake\map\Map;
+use dimajolkin\snake\view\Block;
+use dimajolkin\snake\view\DrawDriver;
 use phpdk\awt\Point;
 
-class Draw
+class Draw implements DrawDriver
 {
     /** @var bool|resource */
     private $stream;
@@ -21,10 +23,10 @@ class Draw
 
     /**
      * @param Point $point
-     * @param string $symbol
+     * @param Block $symbol
      * @deprecated
      */
-    public function drawSymbol(Point $point, string $symbol): void
+    public function block(Point $point, Block $symbol): void
     {
         $this->hideCursor();
         $this->moveCursor($point);
@@ -39,7 +41,7 @@ class Draw
         fwrite($this->stream, PHP_EOL);
     }
 
-    public function draw(Map $map)
+    public function map(Map $map): void
     {
         $this->hideCursor();
         $this->moveCursorToStart();
@@ -47,6 +49,7 @@ class Draw
 
         foreach ($map->getMatrix() as $line) {
             foreach ($line as $char) {
+
                 fwrite($this->stream, (string)$char);
             }
             $this->newLine();

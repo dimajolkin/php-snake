@@ -3,7 +3,7 @@
 namespace dimajolkin\snake;
 
 
-use dimajolkin\snake\view\Char;
+use dimajolkin\snake\view\Block;
 use phpdk\awt\Point;
 
 class Matrix implements \IteratorAggregate
@@ -18,15 +18,23 @@ class Matrix implements \IteratorAggregate
      */
     private $bottomRightPoint;
     /**
-     * @var Char
+     * @var Block
      */
     private $defaultChar;
 
+    /**
+     * @var Block
+     */
     protected $emptyChar;
 
-    public function __construct(Point $leftTopPoint, Point $bottomRightPoint, Char $defaultChar)
+    public function __construct(
+        Point $leftTopPoint,
+        Point $bottomRightPoint,
+        Block $defaultChar,
+        Block $emptyBlock
+    )
     {
-        $this->emptyChar = new Char(' ');
+        $this->emptyChar = $emptyBlock;
 
         for ($x = 0; $x < $bottomRightPoint->getY(); $x++) {
             for ($y = 0; $y < $bottomRightPoint->getX(); $y++) {
@@ -46,9 +54,9 @@ class Matrix implements \IteratorAggregate
     }
 
     /**
-     * @return Char
+     * @return Block
      */
-    public function getDefaultChar(): Char
+    public function getDefaultChar(): Block
     {
         return $this->defaultChar;
     }
@@ -62,7 +70,7 @@ class Matrix implements \IteratorAggregate
         return false;
     }
 
-    public function set(Point $point, Char $symbol): void
+    public function set(Point $point, Block $symbol): void
     {
         $this->matrix[$point->getY()][$point->getX()] = $symbol;
     }
@@ -72,7 +80,7 @@ class Matrix implements \IteratorAggregate
         $this->set($point, $this->defaultChar);
     }
 
-    public function get(Point $point): Char
+    public function get(Point $point): Block
     {
         return $this->matrix[$point->getY()][$point->getX()];
     }

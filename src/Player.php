@@ -2,15 +2,15 @@
 
 namespace dimajolkin\snake;
 
-use dimajolkin\snake\view\Char;
+use dimajolkin\snake\view\Block;
 use phpdk\awt\Point;
 
 class Player
 {
     /**
-     * @var Char
+     * @var Block
      */
-    private $char;
+    private $block;
 
     /**
      * @var Point
@@ -25,11 +25,11 @@ class Player
      * Player constructor.
      * @param Point $position
      * @param Point $look
-     * @param Char $char
+     * @param Block $block
      */
-    public function __construct(Point $position, Point $look, Char $char)
+    public function __construct(Point $position, Point $look, Block $block)
     {
-        $this->char = $char;
+        $this->block = $block;
         $this->position = $position;
         $this->look = $look;
     }
@@ -45,7 +45,6 @@ class Player
         $this->look = new Point($x, $y);
 
         if (!$this->getPosition()->equals($this->look)) {
-            $old = clone $this->getPosition();
             $this->getPosition()->translate(
                 $this->look->getX(),
                 $this->look->getY()
@@ -87,10 +86,10 @@ class Player
     }
 
     /**
-     * @return Char
+     * @return Block
      */
-    public function getChar(): Char
+    public function getBlock(): Block
     {
-        return $this->char;
+        return $this->block;
     }
 }

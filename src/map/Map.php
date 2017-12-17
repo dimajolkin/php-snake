@@ -4,8 +4,7 @@ namespace dimajolkin\snake\map;
 
 
 use dimajolkin\snake\Matrix;
-use dimajolkin\snake\view\Box;
-use dimajolkin\snake\view\Char;
+use dimajolkin\snake\view\Block;
 use phpdk\awt\Point;
 
 class Map
@@ -16,23 +15,29 @@ class Map
     /** @var  Point */
     private $startPoint;
     /**
-     * @var Char
+     * @var Block
      */
     private $emptyChar;
 
 
-    public function __construct(Point $leftTopPoint, Point $bottomRightPoint, Char $emptyChar)
+    public function __construct(
+        Point $leftTopPoint,
+        Point $bottomRightPoint,
+        Block $defaultBlock,
+        Block $emptyBlock
+)
     {
         $this->startPoint = $leftTopPoint;
-        $this->emptyChar = $emptyChar;
+        $this->emptyChar = $defaultBlock;
         $this->matrix = new Matrix(
             $leftTopPoint,
             $bottomRightPoint,
-            $emptyChar
+            $defaultBlock,
+            $emptyBlock
         );
     }
 
-    public function getEmptyChar(): Char
+    public function getEmptyChar(): Block
     {
         return $this->emptyChar;
     }
@@ -47,7 +52,7 @@ class Map
         return $this->matrix->has($point);
     }
 
-    public function set(Point $point, Char $symbol): void
+    public function set(Point $point, Block $symbol): void
     {
         $this->matrix->set($point, $symbol);
     }
@@ -57,7 +62,7 @@ class Map
         $this->matrix->clear($point);
     }
 
-    public function get(Point $point): Char
+    public function get(Point $point): Block
     {
         return $this->matrix->get($point);
     }

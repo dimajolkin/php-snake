@@ -4,7 +4,7 @@ namespace dimajolkin\snake;
 
 use dimajolkin\snake\input\InputInterface;
 use dimajolkin\snake\map\Map;
-use dimajolkin\snake\view\Draw;
+use dimajolkin\snake\view\DrawDriver;
 
 class Game
 {
@@ -14,21 +14,28 @@ class Game
     /** @var  GamePad[] */
     protected $gamePads;
 
-    /** @var  Draw */
-    protected $draw;
+    protected $speed = 500000;
 
-    protected $speed = 500000; //0.5 sec
+    /**
+     * @var DrawDriver
+     */
+    private $driver;
 
     /**
      * Game constructor.
      * @param Map $map
+     * @param DrawDriver $driver
      * @param GamePad[] $gamePads
      */
-    public function __construct(Map $map, array $gamePads)
+    public function __construct(
+        Map $map,
+        DrawDriver $driver,
+        array $gamePads
+    )
     {
         $this->map = $map;
         $this->gamePads = $gamePads;
-        $this->draw = new Draw(STDOUT);
+        $this->driver = $driver;
     }
 
     protected function tick(Player $player, callable $func)
@@ -39,13 +46,13 @@ class Game
 
         $this->map->set(
             $player->getPosition(),
-            $player->getChar()
+            $player->getBlock()
         );
     }
 
     public function loop(InputInterface $keyboard)
     {
-        $this->draw->draw($this->map);
+        $this->driver->map($this->map);
         while (true) {
             $key = $keyboard->getKey();
             foreach ($this->gamePads as $gamePad) {
@@ -59,7 +66,7 @@ class Game
                 }
             }
 
-            $this->draw->draw($this->map);
+            $this->driver->map($this->map);
             usleep($this->speed);
         }
     }

@@ -1,11 +1,14 @@
 <?php
 
-namespace dimajolkin\snake\view;
+namespace dimajolkin\snake\view\ASCII;
 
 
+use dimajolkin\snake\view\Block;
+use dimajolkin\snake\view\Color;
+use dimajolkin\snake\view\Pixel;
 use phpdk\lang\TObject;
 
-class Char extends TObject
+class CharBlock extends TObject implements Block, Pixel
 {
     /** @var  string */
     private $symbol;
@@ -18,7 +21,7 @@ class Char extends TObject
      * @param string $symbol
      * @param $color
      */
-    public function __construct(string $symbol,  int $color = null)
+    public function __construct(string $symbol,  Color $color = null)
     {
         $this->symbol = $symbol;
         $this->color = $color;

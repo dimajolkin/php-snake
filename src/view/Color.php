@@ -2,12 +2,15 @@
 
 namespace dimajolkin\snake\view;
 
-
-class Color
+interface Color
 {
-    const BLACK = 40;
-    const RED = 41;
-    const GREEN = 42;
-    const YELLOW = 43;
-    const BLUE = 44;
+    public static function black(): Color;
+
+    public static function red(): Color;
+
+    public static function green(): Color;
+
+    public static function yellow(): Color;
+
+    public static function blue(): Color;
 }
