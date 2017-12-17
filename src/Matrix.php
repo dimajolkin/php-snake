@@ -64,7 +64,7 @@ class Matrix implements \IteratorAggregate
     public function has(Point $point): bool
     {
         if (isset($this->matrix[$point->getY()]) && isset($this->matrix[$point->getY()][$point->getY()])) {
-            return (string)$this->matrix[$point->getY()][$point->getY()] !== (string)$this->emptyChar;
+            $this->get($point)->equals($this->emptyChar);
         }
 
         return false;
